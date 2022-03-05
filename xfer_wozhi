@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+scp -r prith@wozhi.earth.lsa.umich.edu:/home/prith/spear-vs-change/data/$1 ./data/.

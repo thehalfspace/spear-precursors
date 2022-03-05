@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ i=$1
+ echo '#!/bin/bash'              > ${i}_submit.sh
+ echo "#SBATCH --job-name=${i}"  >> ${i}_submit.sh
+ echo "#SBATCH --nodes=1 "       >> ${i}_submit.sh
+ echo "#SBATCH --ntasks-per-node=1"       >> ${i}_submit.sh
+ echo "#SBATCH --cpus-per-task=1" >> ${i}_submit.sh
+ echo "#SBATCH --mem-per-cpu=4g" >> ${i}_submit.sh
+ echo "#SBATCH --time=02:00:00 " >> ${i}_submit.sh
+ echo "#SBATCH --account=yiheh0"    >> ${i}_submit.sh
+ echo "#SBATCH --partition=standard" >> ${i}_submit.sh
+ echo "#SBATCH --mail-user=prith@umich.edu"  >> ${i}_submit.sh
+ echo "#SBATCH --mail-type=BEGIN,END,FAIL"   >> ${i}_submit.sh
+ echo "#SBATCH --output=/data/${i}.o"    >> ${i}_submit.sh
+ echo "#SBATCH --error=/output/${i}.e"     >> ${i}_submit.sh
+ echo "module load julia"    >> ${i}_submit.sh
+ # echo "export JULIA_NUM_THREADS=8" >>${i}_submit.sh
+ echo "julia /run.jl"  >> ${i}_submit.sh
+ sbatch ${i}_submit.sh
